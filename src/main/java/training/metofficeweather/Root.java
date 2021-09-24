@@ -5,7 +5,7 @@ import training.metofficeweather.Locations;
 
 public class Root {
     @JsonProperty(value="Locations") // For ObjectMapper
-    private Locations locations;
+    public Locations locations;
 
     @Override
     public String toString() {

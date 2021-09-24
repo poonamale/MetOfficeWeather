@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -12,10 +13,21 @@ public class Locations {
     @JsonProperty(value="Location")
     ArrayList<Location> locations;
 
+    ArrayList<Location> getLocations() {
+        return locations;
+    }
+
     @Override
     public String toString() {
         return "Locations{" +
                 "locations=" + locations +
                 '}';
     }
+
+    public HashMap<String, Location> getMap() {
+        HashMap<String, Location> locationHashMap = new HashMap<>();
+        locations.stream().forEach(location -> locationHashMap.put(location.getName(), location));
+        return locationHashMap;
+    }
+
 }
