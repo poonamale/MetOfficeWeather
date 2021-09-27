@@ -11,9 +11,9 @@ import java.util.List;
 
 public class Locations {
     @JsonProperty(value="Location")
-    ArrayList<Location> locations;
+    private ArrayList<Location> locations;
 
-    ArrayList<Location> getLocations() {
+    public ArrayList<Location> getListOfLocations() {
         return locations;
     }
 

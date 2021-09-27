@@ -52,8 +52,7 @@ public class Location {
 
     @Override
     public String toString() {
-
-        return "Location is "+name + "\n" +longitude +"\n" + region + "\n";
+        return name;
 
     }
 
