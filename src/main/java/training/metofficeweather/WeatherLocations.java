@@ -2,7 +2,11 @@ package training.metofficeweather;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.glassfish.jersey.jackson.JacksonFeature;
 
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
 
 public class WeatherLocations {

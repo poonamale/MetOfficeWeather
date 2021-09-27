@@ -8,7 +8,7 @@ public class DV {
     public String dataDate;
     public String type;
     @JsonProperty("Location")
-    WeatherLocations weatherLocations;
+    public WeatherLocations weatherLocations;
 
     public String getDataDate() {
         return dataDate;

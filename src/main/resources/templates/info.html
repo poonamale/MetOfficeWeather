@@ -12,7 +12,12 @@
         <div layout:fragment="content" class="container body-content">
             <h2>Weather Information</h2>
             <div>
-                <p>You entered location id <span th:text="${weatherInfo.locationId}"></span></p>
+                <p><span th:text="${weatherInfo.siteRep.DV.weatherLocations.name}"></span></p>
+            </div>
+            <div>
+                <p>The temperature at your location is: <span th:text="${weatherInfo.siteRep.DV.weatherLocations.period.get(0).rep.get(0).T}"></span> degrees. </p>
+                <p>It feels like: <span th:text="${weatherInfo.siteRep.DV.weatherLocations.period.get(0).rep.get(0).F}"></span> degrees. </p>
+                <p>Chances of rain: <span th:text="${weatherInfo.siteRep.DV.weatherLocations.period.get(0).rep.get(0).Pp}"></span> % </p>
             </div>
         </div>
     </body>
