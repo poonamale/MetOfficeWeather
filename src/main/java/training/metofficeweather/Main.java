@@ -61,6 +61,7 @@ public class Main {
                     RootSiteRep weather = client.target(newURL)
                             .request(MediaType.APPLICATION_JSON)
                             .get(RootSiteRep.class);
+                    System.out.println(locationId);
                     System.out.println("The temperature in "+ weather.siteRep.DV.weatherLocations.name.toLowerCase(Locale.ROOT) +" is " +weather.siteRep.DV.weatherLocations.period.get(0).rep.get(0).T +" degrees");
 
 
