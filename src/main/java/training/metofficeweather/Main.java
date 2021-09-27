@@ -23,6 +23,12 @@ public class Main {
 
 
         //Create instance of location class with all appropriate properties
-        System.out.println(got.locations.getMap());
+//        System.out.println(got.locations.getMap());
+
+        RootSiteRep weather = client.target("http://datapoint.metoffice.gov.uk/public/data/val/wxfcs/all/json/310042?res=3hourly&key=52452172-a037-42d6-8d10-07c179cccb42")
+                .request(MediaType.APPLICATION_JSON)
+                .get(RootSiteRep.class);
+        System.out.println(weather.siteRep.DV.weatherLocations.name);
+        System.out.println(weather.siteRep.DV.weatherLocations.period.get(0).rep.get(0).T);
     }
 }	
