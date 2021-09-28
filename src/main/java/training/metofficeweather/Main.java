@@ -7,6 +7,7 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -29,6 +30,7 @@ public class Main {
 
         executeCommand(command, siteList, locationArray);
         int locationID = firstLocation.getId();
+
 
 
     }

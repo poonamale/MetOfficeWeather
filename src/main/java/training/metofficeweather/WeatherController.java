@@ -9,14 +9,33 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.MediaType;
-import java.util.Locale;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 public class WeatherController {
 
     @RequestMapping("/weather")
     ModelAndView home() {
-        return new ModelAndView("index");
+
+        Locations displayLocations = new Locations();
+        HashMap<String, Integer> locationIDHashMap = new HashMap<>();
+
+        Client client = ClientBuilder.newBuilder().register(JacksonFeature.class).build();
+        Root siteList = client.target("http://datapoint.metoffice.gov.uk/public/data/val/wxfcs/all/json/sitelist?key=99f12f43-b144-4279-8507-f612268f0789")
+                .request(MediaType.APPLICATION_JSON)
+                .get(Root.class);
+
+        ArrayList<Location> locationArray = siteList.getLocations().getListOfLocations();
+
+        for (Location eachLocation : locationArray){
+            String locationName = String.valueOf(eachLocation.getName());
+            Integer locationID = eachLocation.getId();
+            locationIDHashMap.put(locationName,locationID);
+        }
+        Map<String, Integer> treeMap = new TreeMap<String, Integer>(locationIDHashMap);
+
+        return new ModelAndView("index" , "locationIDHashmap", treeMap);
     }
 
     @RequestMapping("/weatherInfo")

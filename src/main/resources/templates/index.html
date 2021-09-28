@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:c=""
       layout:decorate="layout">
 <head>
     <title>Home page</title>
@@ -21,6 +21,29 @@
                 </fieldset>
             </form>
         </div>
+    </div>
+    <div>
+        <p class="lead">Location Name : Location ID</p>
+        <!--- <p>The locations are <span th:text="${locationIDHashmap}"></span></p> --->
+    </div>
+    <div>
+        <input list="brow">
+        <datalist id="brow">
+            <option value="Internet Explorer">
+        </datalist>
+    </div>
+    <div>
+        <table border="1">
+            <tr>
+                <th>Name</th>
+                <th>ID</th>
+            </tr>
+            <tr th:each="mapEntry: ${locationIDHashmap}">
+                <td th:text="${mapEntry.key}"></td>
+                <td th:text="${mapEntry.value}"></td>
+
+            </tr>
+        </table>
     </div>
 </div>
 </body>

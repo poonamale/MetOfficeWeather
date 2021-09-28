@@ -23,10 +23,6 @@ public class WeatherInfo {
         return String.valueOf(firstLocation);
     }
 
-    public String printSomething() {
-        return "Haha";
-    }
-
     public String getLocationId() {
         return locationId;
     }
