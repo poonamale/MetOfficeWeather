@@ -6,18 +6,22 @@
     <!--@thymesVar id="weatherInfo" type="training.metofficeweather.web.WeatherInfo"-->
 
     <head>
+        <meta charset="UTF-8">
+        <link th:href="@{/css/weather.css}" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
         <title>Weather Information</title>
     </head>
     <body>
-        <div layout:fragment="content" class="container body-content">
-            <h2>Weather Information</h2>
+        <div layout:fragment="content" class="container body-content card">
+            <h2><strong><span th:text="${weatherInfo.siteRep.DV.weatherLocations.name}"></span></strong> <span class="weather-name" th:text="${weatherInfo.siteRep.DV.weatherLocations.country}"></span></h2>
+            <p><span th:text="${#dates.format(#dates.createNow(), 'dd MMM yyyy HH:mm')}"></span></p>
             <div>
-                <p><span th:text="${weatherInfo.siteRep.DV.weatherLocations.name}"></span></p>
-            </div>
-            <div>
-                <p>The temperature at your location is: <span th:text="${weatherInfo.siteRep.DV.weatherLocations.period.get(0).rep.get(0).T}"></span> degrees. </p>
-                <p>It feels like: <span th:text="${weatherInfo.siteRep.DV.weatherLocations.period.get(0).rep.get(0).F}"></span> degrees. </p>
-                <p>Chances of rain: <span th:text="${weatherInfo.siteRep.DV.weatherLocations.period.get(0).rep.get(0).Pp}"></span> % </p>
+                <p class="weather-degrees"><span th:text="${weatherInfo.siteRep.DV.weatherLocations.period.get(0).rep.get(0).T}"></span> &#176</p>
+                <p>Feels like <span th:text="${weatherInfo.siteRep.DV.weatherLocations.period.get(0).rep.get(0).F}"></span> &#176 </p>
+                <h2><span th:text="${weatherInfo.siteRep.DV.weatherLocations.period.get(0).rep.get(3).W}"></span></h2>
+                <p><span class="material-icons-outlined">water_drop</span><span th:text="${weatherInfo.siteRep.DV.weatherLocations.period.get(0).rep.get(0).Pp}"></span> % </p>
+                <p><span class="material-icons-outlined">air</span><span th:text="${weatherInfo.siteRep.DV.weatherLocations.period.get(0).rep.get(0).S}"></span> mph </p>
+
             </div>
         </div>
     </body>
