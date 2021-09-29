@@ -47,6 +47,11 @@ public class WeatherController {
 
         int locationId = locationIDHashMap.get(locationName);
 
+        if (!locationIDHashMap.containsKey(locationName)) {
+            String message = "Please choose another location";
+            return new ModelAndView("error", "errorMessage", message);
+        }
+
         String newURL = "http://datapoint.metoffice.gov.uk/public/data/val/wxfcs/all/json/" + locationId + "?res=3hourly&key=8fae71ad-9d25-43e0-8653-4808e2c64b89";
         Client client = ClientBuilder.newBuilder().register(JacksonFeature.class).build();
         RootSiteRep weather = client.target(newURL)
