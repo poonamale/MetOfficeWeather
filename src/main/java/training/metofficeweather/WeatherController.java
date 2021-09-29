@@ -15,31 +15,36 @@ import java.util.stream.Collectors;
 @Controller
 public class WeatherController {
 
+    Locations displayLocations = new Locations();
+    private HashMap<String, Integer> locationIDHashMap = new HashMap<>();
+
+    Client client = ClientBuilder.newBuilder().register(JacksonFeature.class).build();
+    Root siteList = client.target("http://datapoint.metoffice.gov.uk/public/data/val/wxfcs/all/json/sitelist?key=99f12f43-b144-4279-8507-f612268f0789")
+            .request(MediaType.APPLICATION_JSON)
+            .get(Root.class);
+
+
+
     @RequestMapping("/weather")
     ModelAndView home() {
 
-        Locations displayLocations = new Locations();
-        HashMap<String, Integer> locationIDHashMap = new HashMap<>();
-
-        Client client = ClientBuilder.newBuilder().register(JacksonFeature.class).build();
-        Root siteList = client.target("http://datapoint.metoffice.gov.uk/public/data/val/wxfcs/all/json/sitelist?key=99f12f43-b144-4279-8507-f612268f0789")
-                .request(MediaType.APPLICATION_JSON)
-                .get(Root.class);
-
         ArrayList<Location> locationArray = siteList.getLocations().getListOfLocations();
 
-        for (Location eachLocation : locationArray){
+        for (Location eachLocation : locationArray) {
             String locationName = String.valueOf(eachLocation.getName());
             Integer locationID = eachLocation.getId();
-            locationIDHashMap.put(locationName,locationID);
+            locationIDHashMap.put(locationName, locationID);
         }
+
         Map<String, Integer> treeMap = new TreeMap<String, Integer>(locationIDHashMap);
 
         return new ModelAndView("index" , "locationIDHashmap", treeMap);
     }
 
     @RequestMapping("/weatherInfo")
-    ModelAndView weatherInfo(@RequestParam("locationId") Integer locationId) {
+    ModelAndView weatherInfo(@RequestParam("locationName") String locationName) {
+
+        int locationId = locationIDHashMap.get(locationName);
 
         String newURL = "http://datapoint.metoffice.gov.uk/public/data/val/wxfcs/all/json/" + locationId + "?res=3hourly&key=8fae71ad-9d25-43e0-8653-4808e2c64b89";
         Client client = ClientBuilder.newBuilder().register(JacksonFeature.class).build();
