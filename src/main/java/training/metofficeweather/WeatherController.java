@@ -40,7 +40,7 @@ public class WeatherController {
     }
 
     @RequestMapping("/weatherInfo")
-    ModelAndView weatherInfo(@RequestParam("locationId") String locationId) {
+    ModelAndView weatherInfo(@RequestParam("locationId") Integer locationId) {
 
         String newURL = "http://datapoint.metoffice.gov.uk/public/data/val/wxfcs/all/json/" + locationId + "?res=3hourly&key=8fae71ad-9d25-43e0-8653-4808e2c64b89";
         Client client = ClientBuilder.newBuilder().register(JacksonFeature.class).build();
