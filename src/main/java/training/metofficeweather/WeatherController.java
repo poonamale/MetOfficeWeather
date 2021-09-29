@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import training.metofficeweather.data.SelectedRep;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -52,7 +53,14 @@ public class WeatherController {
                 .request(MediaType.APPLICATION_JSON)
                 .get(RootSiteRep.class);
         System.out.println("The temperature in "+ weather.siteRep.DV.weatherLocations.name.toLowerCase(Locale.ROOT) +" is " +weather.siteRep.DV.weatherLocations.period.get(0).rep.get(0).T +" degrees");
-
-        return new ModelAndView("info", "weatherInfo", weather) ;
+        int dayIndex = 0;
+        int timeIndex = 2;
+        SelectedRep selectedRep = new SelectedRep(
+                weather.siteRep.DV.weatherLocations.period.get(dayIndex).rep.get(timeIndex),
+                weather.siteRep.DV.weatherLocations.name,
+                weather.siteRep.DV.weatherLocations.country,
+                weather.siteRep.DV.weatherLocations.period.get(dayIndex).value
+                );
+        return new ModelAndView("info", "weatherInfo", selectedRep) ;
     }
 }
