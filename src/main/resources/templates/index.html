@@ -4,11 +4,11 @@
       layout:decorate="layout">
 <head>
     <meta charset="UTF-8">
-    <link th:href="@{/css/main.css}" rel="stylesheet" />
+    <link th:href="@{/css/homepage.css}" rel="stylesheet" />
     <title>Home page</title>
 </head>
 <body>
-    <div layout:fragment="content" class="container body-content">
+    <div layout:fragment="content" class="container body-content card">
         <div class="jumbotron">
             <h1>Met Office Weather</h1>
             <p class="lead">For all your weather needs. Enter a location ID below and click enter to see the weather forecast for that location.</p>
@@ -17,9 +17,19 @@
             <div class="col-md-12">
                 <form id="messageForm" th:action="@{/weatherInfo}" method="get">
                     <fieldset>
-                        <legend>Location ID: </legend>
-                        <input type="text" name="locationId">
-                        <input type="submit" value="Get Weather Info" />
+                        <div>
+                            <input list="locationList">
+                            <datalist id="locationList">
+                                <select id="locationSelection" name="locationId">
+                                <option th:each="mapScan : ${locationIDHashmap.entrySet()}"
+                                        th:text="${mapScan.key}"
+                                        th:value="${mapScan.value}">
+                                </option>
+                                </select>
+                            </datalist>
+                        </div>
+                        <legend>Location: </legend>
+                        <button type="submit">Get Weather Data</button>
                     </fieldset>
                 </form>
             </div>
@@ -27,27 +37,8 @@
     </div>
     <div>
         <p class="lead">Location Name : Location ID</p>
-        <!--- <p>The locations are <span th:text="${locationIDHashmap}"></span></p> --->
     </div>
-    <div>
-        <input list="brow">
-        <datalist id="brow">
-            <option value="Internet Explorer">
-        </datalist>
-    </div>
-    <div>
-        <table border="1">
-            <tr>
-                <th>Name</th>
-                <th>ID</th>
-            </tr>
-            <tr th:each="mapEntry: ${locationIDHashmap}">
-                <td th:text="${mapEntry.key}"></td>
-                <td th:text="${mapEntry.value}"></td>
 
-            </tr>
-        </table>
-    </div>
 </div>
 </body>
 </html>
