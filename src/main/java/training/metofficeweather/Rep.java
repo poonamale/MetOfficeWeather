@@ -87,7 +87,7 @@ public class Rep {
         } else if (W.equals("1")) {
             W = "Sunny day";
         } else if (W.equals("2")) {
-            W = "Partly cloudy (night)\n";
+            W = "Partly cloudy (night)";
         } else if (W.equals("3")) {
             W = "Partly cloudy (day)";
         } else if (W.equals("4")) {
